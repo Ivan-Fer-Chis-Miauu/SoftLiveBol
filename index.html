@@ -1,54 +1,519 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <title>Empresa de Desarrollo - LaPazSoft</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free Website Template" name="keywords">
-    <meta content="Free Website Template" name="description">
+    <meta content="Desarrollo de software, aplicaciones móviles, marketing digital" name="keywords">
+    <meta content="LaPazSoft - Empresa de desarrollo de software y marketing digital en La Paz, Bolivia" name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Font -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --dark: #0f1419;
+            --light: #f8f9fa;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #06d6a0 0%, #118ab2 100%);
+            --gradient-3: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-soft: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-hover: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .text-primary { color: var(--primary) !important; }
+        .bg-primary { background: var(--gradient-1) !important; }
+
+        /* Enhanced Navbar */
+        .nav-bar {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.3);
+            font-size: 2.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #ffffff !important;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 0 5px;
+            border-radius: 25px;
+            padding: 8px 20px !important;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Enhanced Carousel */
+        .carousel-item {
+            position: relative;
+            height: 100vh;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.6));
+            z-index: 1;
+        }
+
+        .carousel-caption {
+            z-index: 2;
+            text-align: center;
+        }
+
+        .carousel-caption h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 5rem;
+            text-shadow: 0 5px 30px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .carousel-caption h2 {
+            font-weight: 300;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 20%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: 2s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; top: 80%; left: 10%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        /* Enhanced Sections */
+        .section-title h4 {
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .section-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .about-card h1 {
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h5 {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .about-card .fa-check {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+        }
+
+        /* Services Section */
+        .service-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient-2);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .service-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .service-card img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Offer Section */
+        .offer {
+            background: var(--gradient-1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .offer h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .offer .form-control {
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .offer .form-control:focus {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        .offer .btn {
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: var(--gradient-2);
+            border: none;
+        }
+
+        .offer .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Testimonial Section */
+        .testimonial-item {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            margin: 1rem;
+            position: relative;
+        }
+
+        .testimonial-item::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.3;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1d23 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+
+        .footer h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer .btn-outline-light {
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+
+        .footer .btn-outline-light:hover {
+            background: var(--gradient-1);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .carousel-caption h1 {
+                font-size: 3rem;
+            }
+            
+            .carousel-caption h2 {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-brand h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <!-- Navbar Start -->
-    <div class="container-fluid p-0 nav-bar">
-        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+    <div class="container-fluid p-0 nav-bar fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
             <a href="index.html" class="navbar-brand px-lg-4 m-0">
-                <h1 class="m-0 display-4 text-uppercase text-white">SFL</h1>
+                <h1 class="m-0 display-4 text-uppercase">
+                    <i class="fas fa-code mr-2"></i>LaPazSoft
+                </h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="index.html" class="nav-item nav-link active">Inicio</a>
-                    <a href="about.html" class="nav-item nav-link">Acerca de</a>
-                    <a href="service.html" class="nav-item nav-link">Servicio</a>
-                  
+                    <a href="index.html" class="nav-item nav-link active">
+                        <i class="fas fa-home mr-1"></i>Inicio
+                    </a>
+                    <a href="about.html" class="nav-item nav-link">
+                        <i class="fas fa-users mr-1"></i>Acerca de
+                    </a>
+                    <a href="service.html" class="nav-item nav-link">
+                        <i class="fas fa-cogs mr-1"></i>Servicios
+                    </a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Paginas</a>
-                        <div class="dropdown-menu text-capitalize">
-                            <a href="testimonial.html" class="dropdown-item">Testimonio</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <i class="fas fa-plus mr-1"></i>Páginas
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="testimonial.html" class="dropdown-item">
+                                <i class="fas fa-star mr-2"></i>Testimonios
+                            </a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contactos</a>
+                    <a href="contact.html" class="nav-item nav-link">
+                        <i class="fas fa-envelope mr-1"></i>Contacto
+                    </a>
                 </div>
             </div>
         </nav>
@@ -57,22 +522,38 @@
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
-        <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
+        <div id="blog-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">Con un servivio de calidad</h2>
-                        <h1 class="display-1 text-white m-0">LaPazSoft</h1>
-                        <h2 class="text-white m-0">DESDE 2025</h2>
+                <div class="carousel-item active" style="background-image: linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.6)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                    <div class="floating-shapes">
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                    </div>
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
+                        <h2 class="text-white font-weight-light mb-3">
+                            <i class="fas fa-star mr-2"></i>Con un servicio de calidad
+                        </h2>
+                        <h1 class="display-1 text-white mb-3">LaPazSoft</h1>
+                        <h2 class="text-white mb-4">
+                            <i class="fas fa-calendar-alt mr-2"></i>DESDE 2025
+                        </h2>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">Con un servicio de calidad</h2>
-                        <h1 class="display-1 text-white m-0">LaPazSoft</h1>
-                        <h2 class="text-white m-0">* DESDE 2025 *</h2>
+                <div class="carousel-item" style="background-image: linear-gradient(rgba(6, 214, 160, 0.8), rgba(17, 138, 178, 0.6)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                    <div class="floating-shapes">
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                    </div>
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
+                        <h2 class="text-white font-weight-light mb-3">
+                            <i class="fas fa-rocket mr-2"></i>Innovación y Tecnología
+                        </h2>
+                        <h1 class="display-1 text-white mb-3">LaPazSoft</h1>
+                        <h2 class="text-white mb-4">
+                            <i class="fas fa-gem mr-2"></i>DESDE 2025
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -86,90 +567,124 @@
     </div>
     <!-- Carousel End -->
 
-
     <!-- About Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 animate-on-scroll">
         <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Acerca de Nosotros</h4>
+            <div class="section-title text-center">
+                <h4 class="text-primary text-uppercase">
+                    <i class="fas fa-info-circle mr-2"></i>Acerca de Nosotros
+                </h4>
                 <h1 class="display-4">Sirviendo Desde 2025</h1>
             </div>
             <div class="row">
-                <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">Nuestra historia</h1>
-                    <h5 class="mb-3">Jovenes de la Carrera de Sitemas Informaticos</h5>
-                    <p>Como grupo, ahora como socios nos conocimos en 2023 en nuestro primer año de carrera, todos con la misma vision de ayudar a las pequeñas, medianas y grandes empresas de nuestro pais a incorporarse a este mundo tecnológico.</p>
-                </div>
-                <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/about.png" style="object-fit: cover;">
+                <div class="col-lg-4 py-3">
+                    <div class="about-card h-100">
+                        <h1 class="mb-3">
+                            <i class="fas fa-history mr-2"></i>Nuestra Historia
+                        </h1>
+                        <h5 class="mb-3 text-muted">
+                            <i class="fas fa-graduation-cap mr-2"></i>Jóvenes de la Carrera de Sistemas Informáticos
+                        </h5>
+                        <p class="text-justify">Como grupo, ahora como socios nos conocimos en 2023 en nuestro primer año de carrera, todos con la misma visión de ayudar a las pequeñas, medianas y grandes empresas de nuestro país a incorporarse a este mundo tecnológico.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">Nuestra Vision</h1>
-                    <p>Ser una empresa amigable y cordial con nuestros usuarios y clientes. Incorporarse al sector tecnológico con el fin de hacer conocer la empresa a nivel nacional e internacional.</p>
-                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Desarrollar Sistemas</h5>
-                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Actualizar y Mejorar Sistemas</h5>
-                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Gestion de Marketing</h5>
+                <div class="col-lg-4 py-3">
+                    <div class="position-relative h-100" style="min-height: 400px;">
+                        <img class="position-absolute w-100 h-100 rounded-lg shadow" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="object-fit: cover;">
+                        <div class="position-absolute top-0 left-0 w-100 h-100 rounded-lg" style="background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4 py-3">
+                    <div class="about-card h-100">
+                        <h1 class="mb-3">
+                            <i class="fas fa-eye mr-2"></i>Nuestra Visión
+                        </h1>
+                        <p class="mb-4">Ser una empresa amigable y cordial con nuestros usuarios y clientes. Incorporarse al sector tecnológico con el fin de hacer conocer la empresa a nivel nacional e internacional.</p>
+                        <div class="feature-list">
+                            <h5 class="mb-3">
+                                <i class="fa fa-check text-primary mr-3"></i>Desarrollar Sistemas
+                            </h5>
+                            <h5 class="mb-3">
+                                <i class="fa fa-check text-primary mr-3"></i>Actualizar y Mejorar Sistemas
+                            </h5>
+                            <h5 class="mb-3">
+                                <i class="fa fa-check text-primary mr-3"></i>Gestión de Marketing
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- About End -->
 
-
     <!-- Service Start -->
-    <div class="container-fluid pt-5">
+    <div class="container-fluid pt-5 bg-light animate-on-scroll">
         <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Nuestos Servicios</h4>
+            <div class="section-title text-center">
+                <h4 class="text-primary text-uppercase">
+                    <i class="fas fa-tools mr-2"></i>Nuestros Servicios
+                </h4>
                 <h1 class="display-4">Desarrollo y Marketing</h1>
             </div>
             <div class="row">
                 <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="img/service-1.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h4><i class="fa fa-truck service-icon"></i>Desarrollo de Sistemas</h4>
-                            <p class="m-0">Desarrollar Sistemas para los
-                            negocios que quieran incorporarse al mundo de la tecnologia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h4><i class="fa fa-coffee service-icon"></i>Desarrollo de Aplicaciones</h4>
-                            <p class="m-0">Para el área de instituciones 
-                            educativas, poder brindar apps de apoyo para una mejor enseñanza.</p>
+                    <div class="service-card">
+                        <div class="row align-items-center">
+                            <div class="col-sm-5">
+                                <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Desarrollo de Sistemas">
+                            </div>
+                            <div class="col-sm-7">
+                                <h4>
+                                    <i class="fas fa-laptop-code service-icon"></i>Desarrollo de Sistemas
+                                </h4>
+                                <p class="m-0">Desarrollar sistemas innovadores para los negocios que quieran incorporarse al mundo de la tecnología con soluciones personalizadas.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="img/service-3.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h4><i class="fa fa-award service-icon"></i>Diseño de páginas web </h4>
-                            <p class="m-0">Para aumentar la presencia en el internet de las empresas, negocios, etc. Y tengan un mejor alcance para los clientes.</p>
+                    <div class="service-card">
+                        <div class="row align-items-center">
+                            <div class="col-sm-5">
+                                <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Desarrollo de Aplicaciones">
+                            </div>
+                            <div class="col-sm-7">
+                                <h4>
+                                    <i class="fas fa-mobile-alt service-icon"></i>Desarrollo de Aplicaciones
+                                </h4>
+                                <p class="m-0">Para el área de instituciones educativas, poder brindar apps de apoyo para una mejor enseñanza y aprendizaje interactivo.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="img/service-4.jpg" alt="">
+                    <div class="service-card">
+                        <div class="row align-items-center">
+                            <div class="col-sm-5">
+                                <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Diseño Web">
+                            </div>
+                            <div class="col-sm-7">
+                                <h4>
+                                    <i class="fas fa-globe service-icon"></i>Diseño de Páginas Web
+                                </h4>
+                                <p class="m-0">Para aumentar la presencia en internet de las empresas y negocios, logrando un mejor alcance hacia sus clientes potenciales.</p>
+                            </div>
                         </div>
-                        <div class="col-sm-7">
-                            <h4><i class="fa fa-table service-icon"></i>Marketing y Diseño</h4>
-                            <p class="m-0">Ayudar con el alcance a las empresas
-                            o negocios fomentando las promociones y anuncios mediante redes sociales.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-5">
+                    <div class="service-card">
+                        <div class="row align-items-center">
+                            <div class="col-sm-5">
+                                <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Marketing Digital">
+                            </div>
+                            <div class="col-sm-7">
+                                <h4>
+                                    <i class="fas fa-chart-line service-icon"></i>Marketing y Diseño
+                                </h4>
+                                <p class="m-0">Ayudar con el alcance a las empresas o negocios fomentando las promociones y anuncios mediante redes sociales y estrategias digitales.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,114 +693,198 @@
     </div>
     <!-- Service End -->
 
-
     <!-- Offer Start -->
-    <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
+    <div class="offer container-fluid my-5 py-5 text-center position-relative">
         <div class="container py-5">
-            <h1 class="display-3 text-primary mt-3">50% de Descuento</h1>
-            <h1 class="text-white mb-3">Por apertura de Empresa</h1>
-            <h4 class="text-white font-weight-normal mb-4 pb-3">Para incentivar a las empresas en confiar en nosotros y ganarnos su confianza</h4>
-            <form class="form-inline justify-content-center mb-4">
-                <div class="input-group">
-                    <input type="text" class="form-control p-4" placeholder="Tu Email" style="height: 60px;">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary font-weight-bold px-4" type="submit">Registrarse</button>
+            <div class="animate-on-scroll">
+                <h1 class="display-3 text-white mt-3">
+                    <i class="fas fa-percent mr-3"></i>50% de Descuento
+                </h1>
+                <h1 class="text-white mb-3">
+                    <i class="fas fa-gift mr-2"></i>Por Apertura de Empresa
+                </h1>
+                <h4 class="text-white font-weight-normal mb-4 pb-3">
+                    Para incentivar a las empresas en confiar en nosotros y ganarnos su confianza
+                </h4>
+                <form class="form-inline justify-content-center mb-4">
+                    <div class="input-group" style="max-width: 500px;">
+                        <input type="text" class="form-control p-4" placeholder="Tu Email" style="height: 60px;">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary font-weight-bold px-4" type="submit">
+                                <i class="fas fa-paper-plane mr-2"></i>Registrarse
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <!-- Offer End -->
 
-
     <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 animate-on-scroll">
         <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonio</h4>
-                <h1 class="display-4">Nuestros clientes dicen</h1>
+            <div class="section-title text-center">
+                <h4 class="text-primary text-uppercase">
+                    <i class="fas fa-comments mr-2"></i>Testimonios
+                </h4>
+                <h1 class="display-4">Nuestros Clientes Dicen</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="img/testimonial-1.jpg" alt="">
+                        <img class="img-fluid" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Roberto Carlos">
                         <div class="ml-3">
-                            <h4>Roberto Carlos</h4>
-                            <i>Empresario</i>
+                            <h4 class="text-primary">Roberto Carlos</h4>
+                            <i class="text-muted">
+                                <i class="fas fa-briefcase mr-1"></i>Empresario
+                            </i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
+                    <p class="m-0 text-justify">"El equipo de LaPazSoft transformó completamente la presencia digital de mi empresa. Su profesionalismo y dedicación son excepcionales."</p>
+                    <div class="text-warning mt-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
                 </div>
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="img/testimonial-2.jpg" alt="">
+                        <img class="img-fluid" src="https://images.unsplash.com/photo-1494790108755-2616b612b0e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Roxana Velazquez">
                         <div class="ml-3">
-                            <h4>Roxana Velazquez</h4>
-                            <i>Contadora</i>
+                            <h4 class="text-primary">Roxana Velázquez</h4>
+                            <i class="text-muted">
+                                <i class="fas fa-calculator mr-1"></i>Contadora
+                            </i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
+                    <p class="m-0 text-justify">"Excelente servicio de desarrollo de sistemas contables. La aplicación que crearon optimizó todos nuestros procesos financieros."</p>
+                    <div class="text-warning mt-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
                 </div>
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="img/testimonial-3.jpg" alt="">
+                        <img class="img-fluid" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Leonardo Chuquimia">
                         <div class="ml-3">
-                            <h4>Leonardo Chuquimia</h4>
-                            <i>Músico</i>
+                            <h4 class="text-primary">Leonardo Chuquimia</h4>
+                            <i class="text-muted">
+                                <i class="fas fa-music mr-1"></i>Músico
+                            </i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
+                    <p class="m-0 text-justify">"Crearon una plataforma increíble para promocionar mi música. El diseño es moderno y funcional, superó mis expectativas."</p>
+                    <div class="text-warning mt-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
                 </div>
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="img/testimonial-4.jpg" alt="">
+                        <img class="img-fluid" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Juan Carlos">
                         <div class="ml-3">
-                            <h4>Juan Carlos</h4>
-                            <i>Abogado</i>
+                            <h4 class="text-primary">Juan Carlos</h4>
+                            <i class="text-muted">
+                                <i class="fas fa-balance-scale mr-1"></i>Abogado
+                            </i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
+                    <p class="m-0 text-justify">"Su estrategia de marketing digital aumentó significativamente la visibilidad de mi bufete. Muy profesionales y eficientes."</p>
+                    <div class="text-warning mt-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Testimonial End -->
 
-
     <!-- Footer Start -->
-    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4 justify-content-center align-items-center d-flex ">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Encuentranos</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>Calle Vazques 5598, La Paz - Bolivia</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>+591 78979051</p>
-                <p class="m-0"><i class="fa fa-envelope mr-2"></i>softlive999@outlook.com</p>
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4 justify-content-center">
+            <div class="col-lg-4 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4">
+                    <i class="fas fa-map-marker-alt mr-2"></i>Encuéntranos
+                </h4>
+                <div class="contact-info">
+                    <p class="mb-3">
+                        <i class="fas fa-map-marker-alt mr-3 text-primary"></i>
+                        Calle Vásquez 5598, La Paz - Bolivia
+                    </p>
+                    <p class="mb-3">
+                        <i class="fas fa-phone-alt mr-3 text-primary"></i>
+                        +591 78979051
+                    </p>
+                    <p class="m-0">
+                        <i class="fas fa-envelope mr-3 text-primary"></i>
+                        softlive999@outlook.com
+                    </p>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Siguenos</h4>
-                <p>Nuestras redes Sociales</p>
+            <div class="col-lg-4 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4">
+                    <i class="fas fa-share-alt mr-2"></i>Síguenos
+                </h4>
+                <p class="mb-3">Conecta con nosotros en nuestras redes sociales</p>
                 <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-outline-light btn-lg-square mr-3" href="#" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-lg-square mr-3" href="#" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-lg-square mr-3" href="#" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-lg-square" href="#" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios de atencion</h4>
-                <div>
-                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
-                    <p>8.00 AM - 16.00 PM</p>
+            <div class="col-lg-4 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4">
+                    <i class="fas fa-clock mr-2"></i>Horarios de Atención
+                </h4>
+                <div class="schedule-info">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="text-white text-uppercase mb-0">Lunes - Viernes</h6>
+                        <p class="mb-0 text-primary font-weight-bold">8:00 AM - 4:00 PM</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="text-white text-uppercase mb-0">Sábados</h6>
+                        <p class="mb-0 text-muted">Citas previas</p>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
+            <p class="m-0 text-center text-white">
+                &copy; 2025 <a class="text-primary font-weight-bold" href="#">LaPazSoft</a>. 
+                Todos los derechos reservados. 
+                <span class="text-muted">|</span>
+                Diseñado con <i class="fas fa-heart text-danger"></i> para Bolivia
+            </p>
         </div>
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -301,8 +900,218 @@
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling
+        $(document).ready(function() {
+            // Back to top functionality
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 100) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            
+            $('.back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+
+            // Navbar background change on scroll
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 100) {
+                    $('.nav-bar').addClass('navbar-scrolled');
+                } else {
+                    $('.nav-bar').removeClass('navbar-scrolled');
+                }
+            });
+
+            // Animate elements on scroll
+            $(window).scroll(function() {
+                $('.animate-on-scroll').each(function() {
+                    var elementTop = $(this).offset().top;
+                    var elementBottom = elementTop + $(this).outerHeight();
+                    var viewportTop = $(window).scrollTop();
+                    var viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animated');
+                    }
+                });
+            });
+
+            // Testimonial carousel
+            $('.testimonial-carousel').owlCarousel({
+                autoplay: true,
+                smartSpeed: 1500,
+                center: true,
+                dots: true,
+                loop: true,
+                margin: 25,
+                nav: false,
+                navText: [
+                    '<i class="fa fa-angle-left"></i>',
+                    '<i class="fa fa-angle-right"></i>'
+                ],
+                responsiveClass: true,
+                responsive: {
+                    0:{
+                        items:1
+                    },
+                    576:{
+                        items:1
+                    },
+                    768:{
+                        items:2
+                    },
+                    992:{
+                        items:3
+                    }
+                }
+            });
+
+            // Enhanced hover effects
+            $('.service-card').hover(
+                function() {
+                    $(this).find('img').addClass('hover-zoom');
+                },
+                function() {
+                    $(this).find('img').removeClass('hover-zoom');
+                }
+            );
+
+            // Form enhancements
+            $('.offer .form-control').focus(function() {
+                $(this).parent().addClass('focused');
+            }).blur(function() {
+                $(this).parent().removeClass('focused');
+            });
+
+            // Loading animation for carousel
+            $('#blog-carousel').on('slide.bs.carousel', function (e) {
+                var $animatingElements = $(e.relatedTarget).find('[data-animation]');
+                $animatingElements.each(function() {
+                    var $this = $(this);
+                    var animationType = $this.data('animation');
+                    $this.addClass('animated ' + animationType);
+                });
+            });
+
+            // Trigger initial animation check
+            $(window).trigger('scroll');
+        });
+
+        // Preloader (optional)
+        $(window).on('load', function() {
+            $('.preloader').fadeOut('slow');
+        });
+
+        // Enhanced navbar scroll effect
+        let lastScrollTop = 0;
+        $(window).scroll(function() {
+            let scrollTop = $(this).scrollTop();
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                $('.nav-bar').addClass('navbar-hidden');
+            } else {
+                $('.nav-bar').removeClass('navbar-hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+
+    <style>
+        /* Additional CSS for enhanced effects */
+        .navbar-scrolled {
+            background: rgba(102, 126, 234, 0.98) !important;
+            backdrop-filter: blur(15px);
+        }
+
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        .hover-zoom {
+            transform: scale(1.1) !important;
+        }
+
+        .focused {
+            transform: translateY(-5px);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info p {
+            transition: all 0.3s ease;
+        }
+
+        .contact-info p:hover {
+            transform: translateX(10px);
+            color: var(--primary) !important;
+        }
+
+        .schedule-info {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Enhanced testimonial styles */
+        .owl-carousel .owl-item.center .testimonial-item {
+            transform: scale(1.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .testimonial-carousel .owl-dots {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .testimonial-carousel .owl-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin: 0 5px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-carousel .owl-dot.active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Service card enhanced hover */
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+    </style>
 </body>
 
 </html>
